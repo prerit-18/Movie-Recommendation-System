@@ -8,7 +8,7 @@ API_BASE = "https://movie-recommendation-system-hg5q.onrender.com" or "http://12
 # API_BASE = "http://127.0.0.1:8000"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
-st.set_page_config(page_title="Movie Recommender", page_icon="🎬", layout="wide")
+st.set_page_config(page_title="What to Binge", page_icon="🎬", layout="wide")
 
 # =============================
 # STYLES (minimal modern)
@@ -25,7 +25,32 @@ st.markdown(
     background-color: #141414;
     color: white;
 }
+/* REMOVE WHITE TOP HEADER */
+header {
+    background-color: #141414 !important;
+}
 
+/* Remove top padding gap */
+.block-container {
+    padding-top: 0rem !important;
+}
+
+/* Hide default Streamlit toolbar */
+[data-testid="stToolbar"] {
+    visibility: hidden;
+    height: 0%;
+    position: fixed;
+}
+
+/* Remove white hamburger area */
+[data-testid="stHeader"] {
+    background: #141414;
+}
+
+/* Remove footer */
+footer {
+    visibility: hidden;
+}
 /* CONTAINER WIDTH */
 .block-container {
     padding-top: 1rem;
