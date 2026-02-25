@@ -4,8 +4,8 @@ import streamlit as st
 # =============================
 # CONFIG
 # =============================
-API_BASE = "https://movie-recommendation-system-hg5q.onrender.com" or "http://127.0.0.1:8000"
-# API_BASE = "http://127.0.0.1:8000"
+# API_BASE = "https://movie-recommendation-system-hg5q.onrender.com" or "http://127.0.0.1:8000"
+API_BASE = "http://127.0.0.1:8000"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(page_title="What to Binge", page_icon="🎬", layout="wide")
@@ -25,31 +25,29 @@ st.markdown(
     background-color: #141414;
     color: white;
 }
-/* REMOVE WHITE TOP HEADER */
+/* Dark top header */
 header {
     background-color: #141414 !important;
 }
 
-/* Remove top padding gap */
-.block-container {
-    padding-top: 0rem !important;
-}
-
-/* Hide default Streamlit toolbar */
+/* Hide toolbar but KEEP spacing */
 [data-testid="stToolbar"] {
     visibility: hidden;
-    height: 0%;
-    position: fixed;
 }
-
-/* Remove white hamburger area */
+s
+/* Dark header area */
 [data-testid="stHeader"] {
     background: #141414;
 }
 
-/* Remove footer */
-footer {
-    visibility: hidden;
+/* Remove white decoration line */
+[data-testid="stDecoration"] {
+    display: none;
+}
+
+/* IMPORTANT: Keep small top padding */
+.block-container {
+    padding-top: 2rem !important;
 }
 /* CONTAINER WIDTH */
 .block-container {
@@ -330,7 +328,7 @@ with st.sidebar:
     st.markdown("### 🏠 Home Feed (only home)")
     home_category = st.selectbox(
         "Category",
-        ["trending", "popular", "top_rated", "now_playing", "upcoming"],
+        ["Trending", "Popular", "Top Rated", "Now Playing", "Upcoming"],
         index=0,
     )
     grid_cols = st.slider("Grid columns", 4, 8, 6)
@@ -338,7 +336,7 @@ with st.sidebar:
 # =============================
 # HEADER
 # =============================
-st.title("🎬 Movie Recommender")
+st.title("🎬 What to Binge")
 st.markdown(
     "<div class='small-muted'>Type keyword → dropdown suggestions + matching results → open → details + recommendations</div>",
     unsafe_allow_html=True,
