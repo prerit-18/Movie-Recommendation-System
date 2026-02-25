@@ -202,6 +202,20 @@ async def tmdb_search_first(query: str) -> Optional[dict]:
     results = data.get("results", [])
     return results[0] if results else None
 
+async def tmdb_movie_trailer(movie_id: int) -> Optional[str]:
+    """
+    Returns YouTube trailer URL if available.
+    """
+    data = await tmdb_get(f"/movie/{movie_id}/videos", {"language": "en-US"})
+    results = data.get("results", [])
+
+    for video in results:
+        if video.get("type") == "Trailer" and video.get("site") == "YouTube":
+            key = video.get("key")
+            if key:
+                return f"https://www.youtube.com/watch?v={key}"
+
+    return None
 
 # =========================
 # TF-IDF Helpers
@@ -382,9 +396,15 @@ async def tmdb_search(
 
 
 # ---------- MOVIE DETAILS (SAFE ROUTE) ----------
-@app.get("/movie/id/{tmdb_id}", response_model=TMDBMovieDetails)
+@app.get("/movie/id/{tmdb_id}")
 async def movie_details_route(tmdb_id: int):
-    return await tmdb_movie_details(tmdb_id)
+    details = await tmdb_movie_details(tmdb_id)
+    trailer_url = await tmdb_movie_trailer(tmdb_id)
+
+    return {
+        **details.dict(),
+        "trailer_url": trailer_url
+    }
 
 
 # ---------- GENRE RECOMMENDATIONS ----------

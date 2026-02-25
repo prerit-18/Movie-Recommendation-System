@@ -5,6 +5,7 @@ import streamlit as st
 # CONFIG
 # =============================
 API_BASE = "https://movie-recommendation-system-hg5q.onrender.com" or "http://127.0.0.1:8000"
+# API_BASE = "http://127.0.0.1:8000"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(page_title="Movie Recommender", page_icon="🎬", layout="wide")
@@ -422,7 +423,15 @@ elif st.session_state.view == "details":
         st.markdown("---")
         st.markdown("### Overview")
         st.write(data.get("overview") or "No overview available.")
-        st.markdown("</div>", unsafe_allow_html=True)
+
+        trailer_url = data.get("trailer_url")
+
+        if trailer_url:
+            if st.button("▶ Watch Trailer"):
+                st.video(trailer_url)
+                st.markdown("</div>", unsafe_allow_html=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+        
 
     if data.get("backdrop_url"):
         st.markdown("#### Backdrop")
