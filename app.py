@@ -4,8 +4,8 @@ import streamlit as st
 # =============================
 # CONFIG
 # =============================
-# API_BASE = "https://movie-recommendation-system-hg5q.onrender.com" or "http://127.0.0.1:8000"
-API_BASE = "http://127.0.0.1:8000"
+API_BASE = "https://movie-recommendation-system-hg5q.onrender.com" or "http://127.0.0.1:8000"
+# API_BASE = "http://127.0.0.1:8000"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(page_title="What to Binge", page_icon="🎬", layout="wide")
@@ -328,7 +328,7 @@ with st.sidebar:
     st.markdown("### 🏠 Home Feed (only home)")
     home_category = st.selectbox(
         "Category",
-        ["Trending", "Popular", "Top Rated", "Now Playing", "Upcoming"],
+        ["trending", "popular", "top_rated", "now_playing", "upcoming"],
         index=0,
     )
     grid_cols = st.slider("Grid columns", 4, 8, 6)
