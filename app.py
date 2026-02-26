@@ -183,10 +183,27 @@ if st.session_state.view == "home":
     # If searching → show results
     if typed.strip():
         data = api_get_json("/tmdb/search", {"query": typed})
-        if data and isinstance(data, list):
-            poster_grid(data, cols=6, key_prefix="search")
+
+        if data and isinstance(data, dict) and "results" in data:
+            results = data.get("results", [])
+
+            cards = []
+            for movie in results:
+                if movie.get("id") and movie.get("title"):
+                    cards.append({
+                        "tmdb_id": movie["id"],
+                        "title": movie["title"],
+                        "poster_url": f"{TMDB_IMG}{movie['poster_path']}" if movie.get("poster_path") else None
+                    })
+
+            if cards:
+                poster_grid(cards, cols=6, key_prefix="search")
+            else:
+                st.warning("No results found.")
+
         else:
-            st.warning("No results found.")
+            st.warning("Search failed.")
+
         st.stop()
 
     # =============================
