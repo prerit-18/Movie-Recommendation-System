@@ -210,8 +210,8 @@ if st.session_state.view == "home":
         )
         home_category = CATEGORY_MAP[selected_label]
 
-    with col2:
-        grid_cols = st.slider("Grid Columns", 4, 8, 6)
+    # with col2:
+    #     grid_cols = st.slider("Grid Columns", 4, 8, 6)
 
     st.divider()
 
@@ -225,7 +225,7 @@ if st.session_state.view == "home":
     if not home_cards:
         st.warning("Unable to fetch movies.")
     else:
-        poster_grid(home_cards, cols=grid_cols, key_prefix="home")
+        poster_grid(home_cards, cols=6, key_prefix="home")
 # ==========================================================
 # DETAILS VIEW
 # ==========================================================
